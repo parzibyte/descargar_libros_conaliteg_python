@@ -1,0 +1,30 @@
+from flask import Flask, render_template, request, send_file
+import descargador
+import uuid
+import io
+
+app = Flask('app')
+
+
+@app.route('/')
+def hello_world():
+	return render_template("formulario.html")
+
+
+@app.route("/procesar", methods=['POST'])
+def procesar():
+	url = request.form.get("url")
+	paginas = request.form.get("paginas")
+	nombre_sugerido = request.form.get("nombre")
+	nombre_libro = str(uuid.uuid4()) + ".pdf"
+	archivo_pdf_para_enviar_al_cliente = io.BytesIO()
+	imagenes_en_pdf_como_bytes = descargador.descargar_libro(url, int(paginas), nombre_libro)
+	archivo_pdf_para_enviar_al_cliente.write(imagenes_en_pdf_como_bytes)
+	archivo_pdf_para_enviar_al_cliente.seek(0)
+	return send_file(archivo_pdf_para_enviar_al_cliente, mimetype="application/pdf",
+					 download_name=nombre_sugerido + ".pdf",
+					 as_attachment=True)
+
+
+app.run(host='0.0.0.0', port=8080)
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar libro de CONALITEG - By Parzibyte</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://parzibyte.me/blog">
+                <img alt=""
+                    src="https://raw.githubusercontent.com/parzibyte/ejemplo-mern/master/src/img/parzibyte_logo.png"
+                    style="max-height: 80px" />
+            </a>
+            <button class="navbar-burger is-warning button" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a target="_blank" rel="noreferrer" href="https://parzibyte.me/blog" class="button is-primary">
+                            <strong>By Parzibyte</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
+            const boton = document.querySelector(".navbar-burger");
+            const menu = document.querySelector(".navbar-menu");
+            boton.onclick = () => {
+                menu.classList.toggle("is-active");
+                boton.classList.toggle("is-active");
+            };
+        });
+    </script>
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <h1 class="is-size-1">Descargador de libros de CONALITEG</h1>
+                <form method="POST" action="{{url_for('procesar')}}">
+                    <div class="field">
+                        <label class="label">URL de la raíz de las imágenes (por ejemplo,
+                            https://libros.conaliteg.gob.mx/2021/c/P1COA/). No olvides dejar la / al final</label>
+                        <div class="control">
+                            <input class="input" name="url" required type="text" placeholder="URL">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Número de páginas del libro:</label>
+                        <div class="control">
+                            <input class="input" name="paginas" required type="number"
+                                placeholder="Número de páginas del libro">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Nombre del libro, solo para sugerirlo al descargar:</label>
+                        <div class="control">
+                            <input class="input" name="nombre" required type="text"
+                                placeholder="Nombre del libro, solo para sugerirlo al descargar">
+                        </div>
+                    </div>
+                    <input class="button is-primary" type="submit" value="Descargar">
+                </form>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
